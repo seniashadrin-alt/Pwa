@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PWA без иконок</title>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>PWA без иконок</h1>
+    <p>Это PWA-приложение без иконок. Оно может быть установлено, но без значка.</p>
+    <button id="install-btn" style="display: none;">Установить приложение</button>
+  </div>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('Service Worker зарегистрирован:', registration);
+          })
+          .catch(error => {
+            console.error('Ошибка регистрации Service Worker:', error);
+          });
+      });
+    }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      const installBtn = document.getElementById('install-btn');
+      installBtn.style.display = 'block';
+      installBtn.addEventListener('click', () => {
+        e.prompt();
+        installBtn.style.display = 'none';
+      });
+    });
+  </script>
+</body>
+</html>
