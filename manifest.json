@@ -1,0 +1,9 @@
+{
+  "name": "PWA без иконок",
+  "short_name": "PWA No Icons",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4285f4",
+  "orientation": "portrait"
+}
